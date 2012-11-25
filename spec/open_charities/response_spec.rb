@@ -26,6 +26,10 @@ describe OpenCharities::Response do
       @response.title.should == "VETERAN'S HEADQUARTERS"
       @response.charity_number.should == "1149855"
     end
+
+    it "leaves nested hashes unconverted" do
+      @response.address.class.should == Hash
+    end
   end
 
   context "with a company that doesn't exist" do
