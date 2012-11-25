@@ -7,10 +7,10 @@ describe OpenCharities::Response do
   context "with a successful http response" do
     before do
       url = "http://opencharities.org/charities/1149855.json"
-      stub_request(:get, url).to_return(
-        :body => load_fixture("veteransheadquarters.json"),
-        :status => 200
-      )
+      stub_request(:get, url).to_return({
+        body: load_fixture("veteransheadquarters.json"),
+        status: 200
+      })
       @response = subject.new(Faraday.get(url))
     end
 
@@ -35,10 +35,10 @@ describe OpenCharities::Response do
   context "with a company that doesn't exist" do
     before do
       @url = "http://opencharities.org/charities/0000000.json"
-      stub_request(:get, @url).to_return(
-        :body => "Some bullshit HTML response :-(",
-        :status => 404
-      )
+      stub_request(:get, @url).to_return({
+        body: "Not found",
+        status: 404
+      })
     end
 
     it "raises an exception" do
@@ -51,10 +51,10 @@ describe OpenCharities::Response do
   context "when the server is down" do
     before do
       @url = "http://data.OpenCharities.gov.uk/doc/company/12345678.json"
-      stub_request(:get, @url).to_return(
-        :body => "Oh noes",
-        :status => 500
-      )
+      stub_request(:get, @url).to_return({
+        body: "Oh noes",
+        status: 500
+      })
     end
 
     it "raises an exception" do
