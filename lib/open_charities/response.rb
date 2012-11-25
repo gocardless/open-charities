@@ -28,8 +28,7 @@ module OpenCharities
     end
 
     def parse_response(response)
-      body = response.body.encode("UTF-8", "ISO-8859-1")
-      data = JSON.parse(body)
+      data = JSON.parse(response.body)
       @attributes = data["charity"]
 
       generate_convenience_methods
