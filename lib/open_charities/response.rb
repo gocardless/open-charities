@@ -43,7 +43,7 @@ module OpenCharities
     # for example, instance.address returns a hash, but title returns a string
     def generate_convenience_methods
       @attributes.each_pair do |k, v|
-        self.define_singleton_method(k) { v }
+        define_singleton_method(k) { v }
       end
     end
 
