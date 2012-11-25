@@ -14,7 +14,6 @@ module OpenCharities
       Response.new(response)
     end
 
-
     private
 
     def with_caching(&block)

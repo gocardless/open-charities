@@ -4,7 +4,6 @@ require 'webmock/rspec'
 
 require 'open_charities'
 
-
 RSpec.configure do |config|
 
   config.before(:suite) do

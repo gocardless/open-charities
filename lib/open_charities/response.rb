@@ -4,12 +4,10 @@ module OpenCharities
 
     attr_reader :attributes
 
-
     def initialize(response)
       check_for_errors(response)
       parse_response(response)
     end
-
 
     def [](key)
       @attributes[key]
