@@ -25,8 +25,9 @@ module OpenCharities
     def validate(reg_number)
       number = reg_number.to_s.strip
 
-      # match 7-digit numbers *only*
-      charities_regex = Regexp.new("\\A\\d{7}\\z")
+      # match any 6/7 digit number OR 6/7 digit number followed by a dash and
+      # another 1 or 2 numbers
+      charities_regex = /\A\d{6,7}\z|\A\d{6,7}\-\d{1,2}\z/
 
       msg = "#{number} is not a valid UK charity registration number"
       raise InvalidRegistration.new(msg) unless number =~ charities_regex

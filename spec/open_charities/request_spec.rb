@@ -6,16 +6,12 @@ describe OpenCharities::Request do
 
   describe "#new" do
     context "throws an exception" do
-      it "with a number that's too short" do
-        expect {
-          subject.new "123456"
-        }.to raise_exception OpenCharities::InvalidRegistration
-      end
-
-      it "that's too long" do
-        expect {
-          subject.new "12345678"
-        }.to raise_exception OpenCharities::InvalidRegistration
+      %W(12345 12345678 #{"123 ABC"} #{"123?!56"}).each do |n|
+        specify do
+          expect {
+            subject.new n
+          }.to raise_exception OpenCharities::InvalidRegistration
+        end
       end
 
       it "that's nil" do
@@ -23,20 +19,15 @@ describe OpenCharities::Request do
           subject.new nil
         }.to raise_exception OpenCharities::InvalidRegistration
       end
-
-      it "that contains spaces" do
-        expect {
-          subject.new "1234 ABC"
-        }.to raise_exception OpenCharities::InvalidRegistration
-      end
-
-      it "that contains non alphanumeric chars" do
-        expect {
-          subject.new "1234?456"
-        }.to raise_exception OpenCharities::InvalidRegistration
-      end
     end
 
+    context 'is valid' do
+      %w(123456 1234567 123456-1 1234567-1 123456-12 1234567-12).each do |n|
+        specify do
+          expect { subject.new(n) }.to_not raise_exception
+        end
+      end
+    end
   end
 
 
