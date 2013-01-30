@@ -10,7 +10,7 @@ $ gem install open-charities
 ```
 or as a dependency in a Gemfile
 ```ruby
-gem "open-charities", "~> 0.1.0", require: 'open_charities'
+gem "open-charities", "~> 0.2.0", require: 'open_charities'
 ```
 
 ## Usage
